@@ -18,4 +18,7 @@
 
     //jump fall y velocity
     public const string YVELOCITY = "yVelocity";
+
+    // function names
+    public const string BUSYFOR = "BusyFor";
 }

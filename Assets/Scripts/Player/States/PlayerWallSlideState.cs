@@ -34,9 +34,9 @@ public class PlayerWallSlideState : PlayerState
         //    _stateMachine.ChangeState(_player.PlayerIdleState);
 
         if (yInput < 0)
-            rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
+            _player.ChangeVelocity(0, rigidbody2D.velocity.y);
         else
-            rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y * .7f);
+            _player.ChangeVelocity(0, rigidbody2D.velocity.y * .7f);
 
         if (_player.IsGroundDetected())
             _stateMachine.ChangeState(_player.PlayerIdleState);

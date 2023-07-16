@@ -1,5 +1,4 @@
 using Assets.Scripts.Enums;
-using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
@@ -10,7 +9,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        rigidbody2D.velocity = new Vector2 (0, 0);
+        _player.SetZeroVelocity();
     }
 
     public override void Exit()
@@ -35,7 +34,7 @@ public class PlayerIdleState : PlayerGroundedState
             else if (xInput < 0 && _player.facingDirection == (int)PlayerDirectionEnum.Left) return;
         }
 
-        if (xInput is not 0)
+        if (xInput is not 0 && !_player.IsBusy)
             _stateMachine.ChangeState(_player.PlayerMoveState);
     }
 }
