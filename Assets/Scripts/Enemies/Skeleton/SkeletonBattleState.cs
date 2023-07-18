@@ -1,4 +1,4 @@
-using Assets.Scripts.Enemy;
+using Assets.Scripts.Enemies;
 using Assets.Scripts.Enums;
 using UnityEngine;
 
@@ -18,7 +18,10 @@ public class SkeletonBattleState : EnemyState
     {
         base.Enter();
 
-        player = GameObject.Find(EnemyConstants.PLAYER).transform;
+        //palyer manager oluþturmadan kullanýlan yöntem
+        //player = GameObject.Find(EnemyConstants.PLAYER).transform;
+
+        player = PlayerManager.instance.player.transform;
     }
 
     public override void Exit()
@@ -37,6 +40,7 @@ public class SkeletonBattleState : EnemyState
             {
                 if(CanAttack())
                 _stateMachine.ChangeState(_enemySkeleton.SkeletonAttackState);
+                return;
             }
         }
         else
@@ -44,8 +48,6 @@ public class SkeletonBattleState : EnemyState
             if (stateTimer < 0 || Vector2.Distance(player.transform.position, _enemySkeleton.transform.position) > battleStateFinishDistance)
                 _stateMachine.ChangeState(_enemySkeleton.SkeletonIdleState);
         }
-
-
 
         if (player.position.x > _enemySkeleton.transform.position.x)
             moveDirection = (int)PlayerDirectionEnum.Right;

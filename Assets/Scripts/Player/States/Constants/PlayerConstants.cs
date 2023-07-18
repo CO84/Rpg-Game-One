@@ -11,6 +11,8 @@
     //Player Attack
     public const string PRIMARYATTACK = "Attack";
     public const string COMBOCOUNTER = "ComboCounter";
+    public const string SUCCESSFUL_COUNTER_ATTACK = "SuccessfulCounterAttack";
+    public const string COUNTER_ATTACK = "CounterAttack";
 
     //input 
     public const string HORIZONTAL = "Horizontal";

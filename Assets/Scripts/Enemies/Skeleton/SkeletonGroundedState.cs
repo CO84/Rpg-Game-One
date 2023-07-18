@@ -1,4 +1,4 @@
-using Assets.Scripts.Enemy;
+using Assets.Scripts.Enemies;
 using UnityEngine;
 
 public class SkeletonGroundedState : EnemyState
@@ -15,7 +15,7 @@ public class SkeletonGroundedState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        player = GameObject.Find(EnemyConstants.PLAYER).transform;
+        player = PlayerManager.instance.player.transform;
     }
 
     public override void Exit()

@@ -1,4 +1,4 @@
-using Assets.Scripts.Enemy;
+using Assets.Scripts.Enemies;
 
 public class SkeletonStunnedState : EnemyState
 {

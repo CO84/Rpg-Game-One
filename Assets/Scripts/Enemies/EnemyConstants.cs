@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Enemy
+﻿namespace Assets.Scripts.Enemies
 {
     internal static class EnemyConstants
     {

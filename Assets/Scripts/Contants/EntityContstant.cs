@@ -5,5 +5,8 @@
         public const string FLASHFX = "FlashFX";
         public const string HITKNOCKBACK = "HitKnockback";
 
+
+        public const string ATTACK_NUMBER = "AttackNumber";
+
     }
 }

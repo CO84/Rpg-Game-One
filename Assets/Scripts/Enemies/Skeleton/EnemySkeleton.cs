@@ -1,6 +1,6 @@
 
 
-using Assets.Scripts.Enemy;
+using Assets.Scripts.Enemies;
 using UnityEngine;
 
 public class EnemySkeleton : Enemy
@@ -40,7 +40,7 @@ public class EnemySkeleton : Enemy
             StateMachine.ChangeState(SkeletonStunnedState);
     }
 
-    protected override bool CanBeStunned()
+    public override bool CanBeStunned()
     {
         if(base.CanBeStunned())
         {

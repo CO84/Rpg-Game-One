@@ -1,3 +1,4 @@
+using Assets.Scripts.Players.States;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Player : BaseEntity
 
     [Header("Attack Details")]
     public Vector2[] attackMovement;
-
+    public float counterAttackDuration = .2f;
 
     public bool IsBusy { get; private set; } = false;
 
@@ -19,8 +20,6 @@ public class Player : BaseEntity
 
     #region DASH INFO
     [Header("Dash Info")]
-    [SerializeField] private float dashCooldown;
-    protected float dashUsageTimer;
     public float dashSpeed;
     public float dashDuration;
     public float dashDirection { get; private set; }
@@ -36,6 +35,7 @@ public class Player : BaseEntity
     public PlayerDashState PlayerDashState { get; private set; }
     public PlayerWallSlideState PlayerWallSlideState { get; private set; }
     public PlayerWallJumpState PlayerWallJumpState { get; private set; }
+    public PlayerCounterAttackState PlayerCounterAttackState { get; private set; }
     #endregion
 
     #region ATTACK
@@ -43,6 +43,8 @@ public class Player : BaseEntity
     public PlayerPrimaryAttack PlayerPrimaryAttack { get; private set; }
 
     #endregion
+
+    public SkillManager SkillManager { get; private set; }
 
     protected override void Awake()
     {
@@ -57,11 +59,15 @@ public class Player : BaseEntity
         PlayerWallSlideState = new PlayerWallSlideState(StateMachine, this, PlayerConstants.WALLSLIDE);
         PlayerWallJumpState = new PlayerWallJumpState(StateMachine, this, PlayerConstants.JUMP);
         PlayerPrimaryAttack = new PlayerPrimaryAttack(StateMachine, this, PlayerConstants.PRIMARYATTACK);
+        PlayerCounterAttackState = new PlayerCounterAttackState(StateMachine, this, PlayerConstants.COUNTER_ATTACK);
     }
 
     protected override void Start()
     {
         base.Start();
+
+        SkillManager = SkillManager.instance;
+
         StateMachine.Initialize(PlayerIdleState);
     }
 
@@ -89,12 +95,8 @@ public class Player : BaseEntity
         if (IsWallDetected())
             return;
 
-        dashUsageTimer =  dashUsageTimer >= 0 ? dashUsageTimer -= Time.deltaTime : dashUsageTimer;
-        //dashUsageTimer -= Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.DashSkill.CanUseSkill())
         {
-            dashUsageTimer = dashCooldown;
             dashDirection = Input.GetAxisRaw(PlayerConstants.HORIZONTAL);
 
             if(dashDirection is 0)
