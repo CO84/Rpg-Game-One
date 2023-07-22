@@ -36,6 +36,8 @@ public class Player : BaseEntity
     public PlayerWallSlideState PlayerWallSlideState { get; private set; }
     public PlayerWallJumpState PlayerWallJumpState { get; private set; }
     public PlayerCounterAttackState PlayerCounterAttackState { get; private set; }
+    public PlayerAimSwordState PlayerAimSwordState { get; private set; }
+    public PlayerCatchSwordState PlayerCatchSwordState { get; private set; }
     #endregion
 
     #region ATTACK
@@ -45,6 +47,7 @@ public class Player : BaseEntity
     #endregion
 
     public SkillManager SkillManager { get; private set; }
+    public GameObject Sword { get; private set; }
 
     protected override void Awake()
     {
@@ -60,6 +63,9 @@ public class Player : BaseEntity
         PlayerWallJumpState = new PlayerWallJumpState(StateMachine, this, PlayerConstants.JUMP);
         PlayerPrimaryAttack = new PlayerPrimaryAttack(StateMachine, this, PlayerConstants.PRIMARYATTACK);
         PlayerCounterAttackState = new PlayerCounterAttackState(StateMachine, this, PlayerConstants.COUNTER_ATTACK);
+
+        PlayerAimSwordState = new PlayerAimSwordState(StateMachine, this, PlayerConstants.AIM_SWORD);
+        PlayerCatchSwordState = new PlayerCatchSwordState(StateMachine, this, PlayerConstants.CATCH_SWORD);
     }
 
     protected override void Start()
@@ -76,8 +82,17 @@ public class Player : BaseEntity
         base.Update();
         StateMachine.currentState.Update();
         CheckForDashInput();
-        
 
+    }
+
+    public void AssignNewSword(GameObject _newSword)
+    {
+        Sword = _newSword;
+    }
+
+    public void ClearTheSword()
+    {
+        Destroy(Sword);
     }
 
     public IEnumerator BusyFor(float _seconds)

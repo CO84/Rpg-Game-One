@@ -5,6 +5,13 @@ public class Skill : MonoBehaviour
     [SerializeField] protected float cooldown;
     protected float cooldownTimer;
 
+    protected Player player;
+
+    protected virtual void Start()
+    {
+        player = PlayerManager.instance.player;
+    }
+
     protected virtual void Update()
     {
         if(cooldownTimer > -1)
@@ -21,8 +28,6 @@ public class Skill : MonoBehaviour
             return true;
         }
 
-        //TODO Debul kalkacak
-        Debug.Log("Skill is cooldown");
         return false;
     }
 

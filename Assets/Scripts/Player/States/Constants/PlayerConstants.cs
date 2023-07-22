@@ -14,6 +14,9 @@
     public const string SUCCESSFUL_COUNTER_ATTACK = "SuccessfulCounterAttack";
     public const string COUNTER_ATTACK = "CounterAttack";
 
+    public const string AIM_SWORD = "AimSword";
+    public const string CATCH_SWORD = "CatchSword";
+
     //input 
     public const string HORIZONTAL = "Horizontal";
     public const string VERTICAL = "Vertical";

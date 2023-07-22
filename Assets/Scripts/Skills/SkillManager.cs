@@ -6,6 +6,7 @@ public sealed class SkillManager : MonoBehaviour
 
     public Dash DashSkill { get; private set; }
     public Clone CloneSkill { get; private set; }
+    public SwordThrow SwordThrowSkills { get; private set; }
 
     private void Awake()
     {
@@ -19,5 +20,6 @@ public sealed class SkillManager : MonoBehaviour
     {
         DashSkill = GetComponent<Dash>();
         CloneSkill = GetComponent<Clone>();
+        SwordThrowSkills = GetComponent<SwordThrow>();
     }
 }
