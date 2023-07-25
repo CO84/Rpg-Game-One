@@ -8,7 +8,7 @@ public class Player : BaseEntity
     [Header("Attack Details")]
     public Vector2[] attackMovement;
     public float counterAttackDuration = .2f;
-
+    public float swordReturnImpact = 5;
     public bool IsBusy { get; private set; } = false;
 
     #region MOVE INFO
@@ -90,8 +90,9 @@ public class Player : BaseEntity
         Sword = _newSword;
     }
 
-    public void ClearTheSword()
+    public void CatchTheSword()
     {
+        StateMachine.ChangeState(PlayerCatchSwordState);
         Destroy(Sword);
     }
 

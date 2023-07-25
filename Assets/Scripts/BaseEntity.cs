@@ -58,7 +58,6 @@ public abstract class BaseEntity : MonoBehaviour
         Fx.StartCoroutine(EntityContstant.FLASHFX);
         StartCoroutine(EntityContstant.HITKNOCKBACK);
 
-        Debug.Log(gameObject.name + "was damaged");
     }
 
     protected virtual IEnumerator HitKnockback()

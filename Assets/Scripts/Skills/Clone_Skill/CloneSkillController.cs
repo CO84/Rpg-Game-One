@@ -53,7 +53,7 @@ public class CloneSkillController : MonoBehaviour
 
     private void AttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius);
+        Collider2D[] colliders = GetCollider2D(attackCheck.position, attackCheckRadius);
 
         foreach (var hit in colliders)
         {
@@ -64,7 +64,7 @@ public class CloneSkillController : MonoBehaviour
 
     private void FaceClosestTarget()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+        Collider2D[] colliders = GetCollider2D(transform.position, 25);
 
         float closestDistance = Mathf.Infinity;
 
@@ -90,4 +90,6 @@ public class CloneSkillController : MonoBehaviour
                 transform.Rotate(0, 180, 0);
         }
     }
+
+    private Collider2D[] GetCollider2D(Vector2 point, float radius) => Physics2D.OverlapCircleAll(point, radius);
 }
